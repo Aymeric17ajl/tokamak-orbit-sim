@@ -5,7 +5,9 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
 
 import numpy as np 
 import matplotlib.pyplot as plt
-from tokamaksim.fields import B_field, R0, a
+from tokamaksim.fields import B_field, R0, a, B0, q
+
+
 
 x_vals = np.linspace(R0 - a, R0 + a, 20 )
 z_vals = np.linspace(-a, a, 20 )

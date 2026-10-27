@@ -15,31 +15,40 @@ position0 = np.array([R0, 0.0, 0.0])
 v_perp = 10**5
 y0 = np.concatenate([position0, np.array([v_perp, 0.0, 0.0])])
 
-h = 10**-9
-n_steps = 2000
+# Test de convergence du rayon de Larmor
 
-t = 0.0 
-y = y0
-positions = [y[0:3].copy()]
+T = 2e-6  # durée totale de simulation
 
-for i in range (n_steps):
-    y = rk4_step(particle_deriv, y, t, h)
-    t+=h
-    positions.append(y[0:3].copy())
+for h in [1e-9, 5e-10, 2.5e-10]:
+    n_steps = int(T / h)
 
-positions = np.array(positions)
+    t = 0.0
+    y = y0.copy()
+    positions = [y[:3].copy()]
+    velocities = [y[3:6].copy()]
+    
+    for _ in range(n_steps):
+        y = rk4_step(particle_deriv, y, t, h)
+        t += h
+        positions.append(y[:3].copy())
+        velocities.append(y[3:6].copy())
+   
+    
+    positions = np.array(positions)
+    velocities = np.array(velocities)
 
-centre = positions[:, [0,2]].mean(axis=0)  # centre approximatif (colonnes x et z)
-distances = np.linalg.norm(positions[:, [0,2]] - centre, axis=1)
-print("rayon min :", distances.min())
-print("rayon max :", distances.max())
-print("écart relatif :", (distances.max()-distances.min())/distances.mean())
+    speeds = np.linalg.norm(velocities, axis=1)
+    error_v = np.max(np.abs(speeds - speeds[0])) / speeds[0]
 
-plt.figure(figsize=(6,6))
-plt.plot(positions[:, 0],positions[:, 2])
-plt.xlabel("x")
-plt.ylabel("z")
-plt.title("orbite de larmor vue dans le plan x-z")
-plt.axis("equal")
-plt.savefig(os.path.join(os.path.dirname(__file__),"orbite_larmor.png"))
-print("Figure enregisstrée :orbite_larmor.png ")
+    print(f"Erreur relative maximale sur la vitesse : {error_v:.3e}")
+    xz = positions[:, [0, 2]]
+
+    centre = xz.mean(axis=0)
+    distances = np.linalg.norm(xz - centre, axis=1)
+
+    rayon_moyen = distances.mean()
+    ecart = (distances.max() - distances.min()) / rayon_moyen
+
+    print(f"\nh = {h:.2e} s")
+    print(f"Rayon moyen : {rayon_moyen:.8e} m")
+    print(f"Écart relatif : {100*ecart:.4f} %")
