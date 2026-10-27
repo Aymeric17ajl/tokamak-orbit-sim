@@ -64,14 +64,7 @@ Before tracking dynamics, the geometric structure of the magnetic cage must be v
 
 
 
-<p align="center">
-
-&#x20; <img src="scripts/Champ\_poloidal.png" width="650" alt="Poloidal magnetic field visualization">
-
-</p>
-
-<p align="center"><em>Figure 1. Visualization of the simulated poloidal magnetic field lines.</em></p>
-
+<img src="scripts/Champ_poloidal.png" width="650" alt="Poloidal magnetic field visualization">
 
 
 \### 2. The Passing Orbits (High Parallel Velocity: ξ = 0.9)
@@ -80,13 +73,7 @@ When a proton is launched with velocity dominant along the field lines, it trave
 
 
 
-<p align="center">
-
-&#x20; <img src="scripts/orbit\_xi\_0.9.png" width="650" alt="Simulated passing particle trajectory">
-
-</p>
-
-<p align="center"><em>Figure 2. Clean, drift-shifted circular Passing Orbit demonstrating the Shafranov Shift.</em></p>
+<img src="scripts/orbit_xi_0.9.png" width="650" alt="Simulated passing particle trajectory">
 
 
 
@@ -96,14 +83,7 @@ When a particle has more side-to-side velocity, it encounters an invisible wall.
 
 
 
-<p align="center">
-
-&#x20; <img src="scripts/orbit\_xi\_0.3.png" width="650" alt="Simulated trapped banana orbit">
-
-</p>
-
-<p align="center"><em>Figure 3. Complete, macroscopic Trapped Orbit exhibiting reflection and banana closure.</em></p>
-
+<img src="scripts/orbit_xi_0.3.png" width="650" alt="Simulated trapped banana orbit">
 
 
 \### 4. Micro-scale Larmor Gyromotion
